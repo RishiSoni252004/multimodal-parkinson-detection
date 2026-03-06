@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Prediction</title>
+    <!-- Modern stylish fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+            border: 1px solid #334155;
+            margin-bottom: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Tabs styling */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Mic & Recording Styles */
+        .record-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            border: 2px dashed #475569;
+            border-radius: 0.75rem;
+            background-color: rgba(15, 23, 42, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .record-container.recording {
+            border-color: var(--danger);
+            background-color: rgba(239, 68, 68, 0.05);
+            animation: pulse-border 1.5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .mic-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-hover);
+        }
+
+        .mic-btn.recording {
+            background-color: var(--danger);
+        }
+
+        .mic-btn.recording:hover {
+            background-color: #dc2626;
+        }
+
+        .reading-phrase {
+            background-color: #1e293b;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            font-style: italic;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .results {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .prediction-text {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .positive {
+            color: var(--danger);
+        }
+
+        .negative {
+            color: var(--success);
+        }
+
+        .confidence {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .plots-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .plot-container {
+            background: #0f172a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid #334155;
+        }
+
+        .plot-container h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+
+        .plot-container img {
+            width: 100%;
+            border-radius: 0.25rem;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #334155;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Voice-Based Parkinson's Prediction</h1>
+            <p>Upload a voice recording to analyze phonetic features and predict Parkinson's disease with Explainable
+                AI.</p>
+        </div>
+
+        <div class="reading-phrase">
+            <strong>Please read the following phrase clearly into your microphone:</strong><br><br>
+            "The quick brown fox jumps over the lazy dog. She sells seashells by the seashore. I love to wake up early
+            on a sunny morning and listen to the birds sing their beautiful melodies."
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('prediction')">Predictor</button>
+            <button class="tab-btn" onclick="switchTab('analysis')">Dataset & Model Analysis</button>
+        </div>
+
+        <div id="prediction" class="tab-content active">
+            <div class="card" id="recording-card">
+                <div class="record-container" id="record-container">
+                    <button class="mic-btn" id="record-btn">🎙️</button>
+                    <div class="timer" id="recording-timer">00:00</div>
+                    <h3 style="margin: 0 0 0.5rem 0;" id="record-status">Click to Start Recording</h3>
+                    <p style="margin: 0; color: var(--text-muted); text-align: center;">Record yourself reading the
+                        phrase above.<br>Press again to stop and auto-analyze.</p>
+                </div>
+                <div class="loader" id="loader"></div>
+            </div>
+
+            <div class="card results" id="results-section">
+                <div class="result-header">
+                    <div class="prediction-text" id="pred-text">Result</div>
+                    <div class="confidence" id="conf-text">Confidence: -</div>
+                </div>
+
+                <div class="plots-grid">
+                    <div class="plot-container">
+                        <h3>Waveform Analysis</h3>
+                        <img id="waveform-img" src="" alt="Waveform">
+                    </div>
+                    <div class="plot-container">
+                        <h3>Spectrogram</h3>
+                        <img id="spectrogram-img" src="" alt="Spectrogram">
+                    </div>
+                    <div class="plot-container">
+                        <h3>Feature Importance (SHAP Explainable AI)</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8; margin-top: -0.5rem; margin-bottom: 1rem;">
+                            Shows which voice features most strongly influenced this specific prediction.
+                        </p>
+                        <img id="shap-img" src="" alt="SHAP Feature Importance">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="analysis" class="tab-content">
+            <div class="card">
+                <div style="margin-bottom: 2rem; border-bottom: 1px solid #334155; padding-bottom: 1rem;">
+                    <h2>Model & Dataset Analysis Dashboard</h2>
+                    <p style="color: var(--text-muted);">Visualizations generated during the model training phase.</p>
+                </div>
+
+                <div class="plots-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+                    <div class="plot-container">
+                        <h3>Dataset Class Distribution</h3>
+                        <img src="plots/dataset_distribution.png" alt="Dataset Distribution Chart"
+                            onerror="this.src=''; this.alt='Training in progress or plots missing. Please run train_model.py.'">
+                    </div>
+                    <div class="plot-container">
+                        <h3>Model Performance Comparison</h3>
+                        <img src="plots/model_comparison.png" alt="Model Comparison Chart"
+                            onerror="this.src=''; this.alt='Plots not found.'">
+                    </div>
+                    <div class="plot-container" style="grid-column: 1 / -1;">
+                        <h3>Feature Correlation Heatmap</h3>
+                        <p style="font-size: 0.9rem; color: #94a3b8; margin-top: -0.5rem; margin-bottom: 1rem;">Shows
+                            correlations between all extracted audio features.</p>
+                        <img src="plots/feature_correlation.png" alt="Feature Correlation Heatmap"
+                            onerror="this.src=''; this.alt='Plots not found.'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            document.querySelector(`.tab-btn[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Live Audio Recording Logic
+        const recordBtn = document.getElementById('record-btn');
+        const recordStatus = document.getElementById('record-status');
+        const recordContainer = document.getElementById('record-container');
+        const timerDisplay = document.getElementById('recording-timer');
+        const loader = document.getElementById('loader');
+        const resultsSection = document.getElementById('results-section');
+
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let timerInterval;
+        let recordingTime = 0;
+
+        function updateTimer() {
+            recordingTime++;
+            const minutes = Math.floor(recordingTime / 60).toString().padStart(2, '0');
+            const seconds = (recordingTime % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${minutes}:${seconds}`;
+        }
+
+        recordBtn.addEventListener('click', async () => {
+            if (!isRecording) {
+                // Start Recording
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = event => {
+                        if (event.data.size > 0) {
+                            audioChunks.push(event.data);
+                        }
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        // Stop tracks to release microphone
+                        stream.getTracks().forEach(track => track.stop());
+                        
+                        // Create Blob
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); 
+                        // Note: Using webm, the Flask backend may need to handle it or Librosa normally handles it fine.
+                        // We will send it as 'audio.webm'
+                        processAudio(audioBlob);
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    
+                    // UI Updates
+                    recordBtn.classList.add('recording');
+                    recordContainer.classList.add('recording');
+                    recordBtn.innerHTML = '🛑';
+                    recordStatus.textContent = "Recording... Click to Stop";
+                    
+                    recordingTime = 0;
+                    timerDisplay.textContent = "00:00";
+                    timerInterval = setInterval(updateTimer, 1000);
+                    
+                    // Hide previous results
+                    resultsSection.style.display = 'none';
+
+                } catch (err) {
+                    console.error("Microphone access denied or error: ", err);
+                    alert("Unable to access the microphone. Please allow microphone permissions in your browser.");
+                }
+            } else {
+                // Stop Recording
+                mediaRecorder.stop();
+                isRecording = false;
+                
+                // UI Updates
+                recordBtn.classList.remove('recording');
+                recordContainer.classList.remove('recording');
+                recordBtn.innerHTML = '🎙️';
+                recordStatus.textContent = "Analyzing Audio...";
+                clearInterval(timerInterval);
+            }
+        });
+
+        async function processAudio(audioBlob) {
+            // UI State
+            recordBtn.disabled = true;
+            loader.style.display = 'block';
+
+            const formData = new FormData();
+            // Append as webm, but name it so Flask recognizes it needs parsing
+            formData.append('file', audioBlob, 'recording.webm');
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    // Update Results UI
+                    const textEl = document.getElementById('pred-text');
+                    textEl.textContent = data.prediction;
+                    if (data.prediction.includes("Healthy")) {
+                        textEl.className = 'prediction-text negative';
+                    } else {
+                        textEl.className = 'prediction-text positive';
+                    }
+                    
+                    document.getElementById('conf-text').textContent = `Confidence: ${(data.confidence * 100).toFixed(1)}%`;
+                    
+                    document.getElementById('waveform-img').src = data.waveform + "?t=" + new Date().getTime();
+                    document.getElementById('spectrogram-img').src = data.spectrogram + "?t=" + new Date().getTime();
+                    if (data.shap) {
+                        document.getElementById('shap-img').src = data.shap + "?t=" + new Date().getTime();
+                    }
+                    
+                    resultsSection.style.display = 'block';
+                }
+            } catch (err) {
+                alert('Connection error. Please ensure the backend is running.');
+                console.error(err);
+            } finally {
+                recordBtn.disabled = false;
+                loader.style.display = 'none';
+                recordStatus.textContent = "Click to Start Recording";
+                timerDisplay.textContent = "00:00";
+            }
+        }
+    </script>
+</body>
+
+</html>

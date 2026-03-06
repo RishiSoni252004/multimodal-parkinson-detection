@@ -1,0 +1,10 @@
+scikit-learn
+pandas
+numpy
+xgboost
+librosa
+flask
+werkzeug
+shap
+matplotlib
+seaborn
