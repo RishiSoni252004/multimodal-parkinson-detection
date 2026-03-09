@@ -8,3 +8,8 @@ werkzeug
 shap
 matplotlib
 seaborn
+streamlit
+imbalanced-learn
+torch
+transformers
+soundfile

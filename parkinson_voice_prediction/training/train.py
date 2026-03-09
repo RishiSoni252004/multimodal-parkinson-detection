@@ -12,31 +12,59 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg') # Headless mode
+from imblearn.over_sampling import SMOTE
 
 from feature_extraction.extract_features import process_audio_directory
 
-def load_or_extract_data(dataset_path='dataset/', default_csv='dataset/parkinsons.data'):
+# Features that can be RELIABLY extracted from live audio using parselmouth (Praat).
+# Only features where Praat's output directly matches the training data distribution.
+RELIABLE_FEATURES = [
+    'numPulses', 'numPeriodsPulses', 'meanPeriodPulses',
+    'locPctJitter', 'locAbsJitter', 'rapJitter', 'ppq5Jitter', 'ddpJitter',
+    'locShimmer', 'locDbShimmer', 'apq3Shimmer', 'apq5Shimmer', 'apq11Shimmer', 'ddaShimmer',
+    'meanAutoCorrHarmonicity', 'meanNoiseToHarmHarmonicity', 'meanHarmToNoiseHarmonicity',
+    'minIntensity', 'maxIntensity', 'meanIntensity',
+    'f1', 'f2', 'f3', 'f4', 'b1', 'b2', 'b3', 'b4',
+]
+
+def load_or_extract_data():
     """
-    Loads dataset from a CSV/Data file, or extracts features from an audio directory if CSV is not found.
-    Handles 'status' column as the target label.
+    Loads the best available dataset. Prefers the larger UCI pd_speech_features.csv (756 samples)
+    over the original parkinsons.data (195 samples).
+    Filters to only reliably-extractable features when using the large dataset.
     """
-    if os.path.exists(default_csv):
-        print(f"Loading dataset from {default_csv}...")
-        df = pd.read_csv(default_csv)
-        # Assuming we don't need 'name' for training
+    large_csv = 'dataset/pd_speech_features.csv'
+    small_csv = 'dataset/parkinsons.data'
+    
+    if os.path.exists(large_csv):
+        print(f"Loading LARGE dataset from {large_csv} (756 samples)...")
+        df = pd.read_csv(large_csv, header=1)  # header on row 2
+        # Drop non-feature columns
+        for col in ['id', 'gender']:
+            if col in df.columns:
+                df = df.drop(columns=[col])
+        # Filter to only reliably-extractable features + target
+        available = [f for f in RELIABLE_FEATURES if f in df.columns]
+        target_col = 'class' if 'class' in df.columns else df.columns[-1]
+        df = df[available + [target_col]]
+        print(f"  Filtered to {len(available)} reliably-extractable features")
+    elif os.path.exists(small_csv):
+        print(f"Loading dataset from {small_csv}...")
+        df = pd.read_csv(small_csv)
         if 'name' in df.columns:
             df = df.drop(columns=['name'])
     else:
-        print(f"Dataset not found at {default_csv}. Attempting to extract audio features from {dataset_path}...")
+        print("No dataset found. Attempting audio extraction...")
         features_csv = 'dataset/extracted_features.csv'
         if os.path.exists(features_csv):
             df = pd.read_csv(features_csv)
         else:
-            df = process_audio_directory(dataset_path, features_csv)
+            df = process_audio_directory('dataset/', features_csv)
             if df.empty:
-                raise FileNotFoundError("Dataset is empty or could not extract features. Provide a valid dataset.")
-            
+                raise FileNotFoundError("Dataset is empty. Provide a valid dataset.")
+    
     return df
+
 
 def evaluate_model(y_true, y_pred, model_name):
     """
@@ -64,21 +92,23 @@ def train_and_compare_models():
     """
     df = load_or_extract_data()
     
-    # The uploaded dataset has 'status' as the target column.
-    if 'status' in df.columns:
-        X = df.drop(columns=['status'])
-        y = df['status']
-        # Re-assign 'target' so downstream pie chart logic doesn't break
-        df['target'] = df['status']
-    elif 'target' in df.columns:
-        X = df.drop(columns=['target'])
-        y = df['target']
-    else:
-        # Fallback if user provides a generic CSV
-        columns = df.columns
-        X = df.drop(columns=[columns[-1]])
-        y = df[columns[-1]]
-        df['target'] = y
+    # Detect the target column: 'class' (new dataset) or 'status' (original)
+    target_col = None
+    for candidate in ['class', 'status', 'target']:
+        if candidate in df.columns:
+            target_col = candidate
+            break
+    
+    if target_col is None:
+        target_col = df.columns[-1]  # Fallback: last column
+    
+    print(f"Using target column: '{target_col}'")
+    X = df.drop(columns=[target_col])
+    y = df[target_col]
+    df['target'] = y
+    
+    print(f"Dataset: {len(df)} samples, {X.shape[1]} features")
+    print(f"Class distribution: {y.value_counts().to_dict()}")
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
@@ -87,14 +117,21 @@ def train_and_compare_models():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
     
+    # Apply SMOTE to synthetically balance the training data
+    smote = SMOTE(random_state=42)
+    X_train_scaled, y_train = smote.fit_resample(X_train_scaled, y_train)
+    
     # Save the scaler
     os.makedirs('models', exist_ok=True)
     joblib.dump(scaler, 'models/scaler.pkl')
     
     models = {
-        'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
-        'SVM': SVC(probability=True, random_state=42),
-        'XGBoost': XGBClassifier(use_label_encoder=False, eval_metric='logloss', random_state=42)
+        'Random Forest': RandomForestClassifier(n_estimators=500, max_depth=15, random_state=42),
+        'SVM': SVC(probability=True, kernel='rbf', C=10, gamma='scale', random_state=42),
+        'XGBoost': XGBClassifier(
+            n_estimators=500, max_depth=6, learning_rate=0.05,
+            use_label_encoder=False, eval_metric='logloss', random_state=42
+        )
     }
     
     best_model_name = None

@@ -4,198 +4,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parkinson's Disease Prediction</title>
-    <!-- Modern stylish fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Parkinson's Disease Prediction — Voice Analysis AI</title>
+    <meta name="description"
+        content="AI-powered Parkinson's disease prediction using voice analysis with Explainable AI (SHAP). University Minor Project.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
+        /* ============================================
+           DESIGN SYSTEM — VARIABLES
+           ============================================ */
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --accent: #06b6d4;
+            --accent-light: #22d3ee;
+            --bg-deep: #030712;
+            --bg-card: rgba(15, 23, 42, 0.6);
+            --bg-card-solid: #0f172a;
+            --glass-border: rgba(99, 102, 241, 0.15);
+            --glass-bg: rgba(15, 23, 42, 0.65);
+            --text-main: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             --success: #10b981;
+            --success-light: #34d399;
             --danger: #ef4444;
+            --danger-light: #f87171;
+            --warning: #f59e0b;
+            --border: rgba(51, 65, 85, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-deep);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
+        /* ============================================
+           ANIMATED BACKGROUND
+           ============================================ */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 900px;
-            padding: 2rem;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        .header {
+        .bg-animation .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-animation .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #6366f1, transparent 70%);
+            top: -10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .bg-animation .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #06b6d4, transparent 70%);
+            bottom: -10%;
+            right: -5%;
+            animation-delay: -7s;
+        }
+
+        .bg-animation .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #8b5cf6, transparent 70%);
+            top: 40%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(60px, -40px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-30px, 60px) scale(0.95);
+            }
+
+            75% {
+                transform: translate(40px, 30px) scale(1.05);
+            }
+        }
+
+        /* Subtle grid pattern overlay */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ============================================
+           HEADER / HERO
+           ============================================ */
+        .hero {
             text-align: center;
-            margin-bottom: 2rem;
+            padding: 3rem 1rem 2.5rem;
+            position: relative;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #60a5fa, #a78bfa);
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: var(--primary-light);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 1.25rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #818cf8 40%, #06b6d4 70%, #34d399 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .header p {
-            color: var(--text-muted);
+        .hero p {
+            color: var(--text-secondary);
             font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-            border: 1px solid #334155;
-            margin-bottom: 2rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Tabs styling */
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 0px;
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .tab-btn:hover {
+        .hero p strong {
             color: var(--text-main);
         }
 
-        .tab-btn.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+        /* ============================================
+           STATS BAR
+           ============================================ */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 2.5rem;
+            flex-wrap: wrap;
         }
 
-        .tab-content {
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .stat-value.accent {
+            color: var(--accent-light);
+        }
+
+        .stat-value.primary {
+            color: var(--primary-light);
+        }
+
+        .stat-value.success {
+            color: var(--success-light);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 40px;
+            background: var(--border);
+            align-self: center;
+        }
+
+        /* ============================================
+           NAVIGATION TABS (Top Level)
+           ============================================ */
+        .nav-tabs {
+            display: flex;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 5px;
+            margin-bottom: 2rem;
+            gap: 4px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--text-main);
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .nav-tab .tab-icon {
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .tab-pane {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeSlideUp 0.4s ease;
         }
 
-        .tab-content.active {
+        .tab-pane.active {
             display: block;
         }
 
-        /* Mic & Recording Styles */
-        .record-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            border: 2px dashed #475569;
-            border-radius: 0.75rem;
-            background-color: rgba(15, 23, 42, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .record-container.recording {
-            border-color: var(--danger);
-            background-color: rgba(239, 68, 68, 0.05);
-            animation: pulse-border 1.5s infinite;
-        }
-
-        @keyframes pulse-border {
-            0% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-            }
-
-            70% {
-                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-            }
-        }
-
-        .mic-btn {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            font-size: 2rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s;
-            margin-bottom: 1rem;
-        }
-
-        .mic-btn:hover {
-            transform: scale(1.05);
-            background-color: var(--primary-hover);
-        }
-
-        .mic-btn.recording {
-            background-color: var(--danger);
-        }
-
-        .mic-btn.recording:hover {
-            background-color: #dc2626;
-        }
-
-        .reading-phrase {
-            background-color: #1e293b;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--primary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #e2e8f0;
-            font-style: italic;
-        }
-
-        .timer {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .results {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
+        @keyframes fadeSlideUp {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(16px);
             }
 
             to {
@@ -204,75 +347,596 @@
             }
         }
 
-        .result-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #334155;
+        /* ============================================
+           GLASS CARD
+           ============================================ */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
         }
 
-        .prediction-text {
-            font-size: 2rem;
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
             font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text-main);
+        }
+
+        .card-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           INPUT MODE TOGGLE (Record vs Upload)
+           ============================================ */
+        .mode-toggle {
+            display: flex;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 1.5rem;
+            gap: 4px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 11px 16px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .mode-btn:hover {
+            color: var(--text-main);
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
+        }
+
+        .mode-content {
+            display: none;
+            animation: fadeSlideUp 0.35s ease;
+        }
+
+        .mode-content.active {
+            display: block;
+        }
+
+        /* ============================================
+           RECORDING SECTION
+           ============================================ */
+        .phrase-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.06), rgba(6, 182, 212, 0.06));
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            border-radius: var(--radius-md);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phrase-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 4px 0 0 4px;
+        }
+
+        .phrase-box .phrase-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+        }
+
+        .phrase-box .phrase-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .record-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 1.5rem;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            background: rgba(3, 7, 18, 0.3);
+            transition: var(--transition);
+        }
+
+        .record-area.recording {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.03);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.08);
+        }
+
+        .mic-button {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            color: white;
+            font-size: 2.2rem;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .mic-button:hover {
+            transform: scale(1.07);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.5);
+        }
+
+        .mic-button.recording {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+            animation: mic-pulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes mic-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5), 0 8px 30px rgba(239, 68, 68, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 0 18px rgba(239, 68, 68, 0), 0 8px 30px rgba(239, 68, 68, 0.3);
+            }
+        }
+
+        /* Rings behind the mic button */
+        .mic-ring {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            animation: ring-expand 2.5s ease-out infinite;
+            pointer-events: none;
+        }
+
+        .mic-ring:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+
+        .mic-ring:nth-child(3) {
+            animation-delay: 1.6s;
+        }
+
+        .recording .mic-ring {
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        @keyframes ring-expand {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        .timer-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-family: 'Inter', monospace;
+            color: var(--text-main);
+            margin-top: 1.25rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .record-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .record-hint {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================
+           UPLOAD SECTION
+           ============================================ */
+        .upload-dropzone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-md);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(3, 7, 18, 0.3);
+        }
+
+        .upload-dropzone:hover,
+        .upload-dropzone.dragover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.04);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .upload-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
             margin-bottom: 0.5rem;
         }
 
-        .positive {
-            color: var(--danger);
-        }
-
-        .negative {
-            color: var(--success);
-        }
-
-        .confidence {
-            font-size: 1.2rem;
+        .upload-or {
+            font-size: 0.85rem;
             color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary-light);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .browse-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .upload-formats {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        .selected-file {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            font-size: 0.9rem;
+        }
+
+        .analyze-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 1.25rem;
+            background: linear-gradient(135deg, var(--success), #059669);
+            border: none;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.3px;
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .analyze-btn:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* ============================================
+           LOADER
+           ============================================ */
+        .loader-container {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loader-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           RESULTS SECTION
+           ============================================ */
+        .results-card {
+            display: none;
+            animation: fadeSlideUp 0.5s ease;
+        }
+
+        .results-card.visible {
+            display: block;
+        }
+
+        .result-banner {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-banner.healthy {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.08));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .result-banner.parkinsons {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(249, 115, 22, 0.08));
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .result-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-prediction {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-prediction.healthy {
+            color: var(--success-light);
+        }
+
+        .result-prediction.parkinsons {
+            color: var(--danger-light);
+        }
+
+        .result-confidence {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .result-confidence span {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .plots-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .plots-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
         }
 
         .plots-grid {
             display: grid;
             grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .plot-card {
+            background: rgba(3, 7, 18, 0.5);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .plot-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .plot-card h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .plot-card .plot-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .plot-card img {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            display: block;
+        }
+
+        /* ============================================
+           ANALYSIS TAB
+           ============================================ */
+        .analysis-header {
+            margin-bottom: 2rem;
+        }
+
+        .analysis-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .analysis-header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
             gap: 1.5rem;
         }
 
-        .plot-container {
-            background: #0f172a;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            border: 1px solid #334155;
+        .analysis-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
         }
 
-        .plot-container h3 {
-            margin-top: 0;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: #e2e8f0;
+        .analysis-card:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: var(--shadow-glow);
         }
 
-        .plot-container img {
+        .analysis-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .analysis-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .analysis-card .analysis-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .analysis-card img {
             width: 100%;
-            border-radius: 0.25rem;
+            border-radius: var(--radius-sm);
+            display: block;
         }
 
-        .loader {
-            display: none;
-            border: 4px solid #334155;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            text-align: center;
+            padding: 2.5rem 1rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
+        .footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            100% {
-                transform: rotate(360deg);
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .app-container {
+                padding: 1rem;
+            }
+
+            .glass-card {
+                padding: 1.25rem;
+            }
+
+            .mode-btn {
+                font-size: 0.82rem;
+                padding: 9px 10px;
             }
         }
     </style>
@@ -280,109 +944,240 @@
 
 <body>
 
-    <div class="container">
-        <div class="header">
-            <h1>Voice-Based Parkinson's Prediction</h1>
-            <p>Upload a voice recording to analyze phonetic features and predict Parkinson's disease with Explainable
-                AI.</p>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    <div class="bg-grid"></div>
+
+    <!-- Main App -->
+    <div class="app-container">
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                AI-Powered Voice Analysis
+            </div>
+            <h1>Parkinson's Disease<br>Prediction System</h1>
+            <p>Analyze voice recordings using <strong>Machine Learning</strong> and <strong>Explainable AI</strong> to
+                predict Parkinson's disease with clinical-grade accuracy.</p>
         </div>
 
-        <div class="reading-phrase">
-            <strong>Please read the following phrase clearly into your microphone:</strong><br><br>
-            "The quick brown fox jumps over the lazy dog. She sells seashells by the seashore. I love to wake up early
-            on a sunny morning and listen to the birds sing their beautiful melodies."
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value accent">756</div>
+                <div class="stat-label">Samples</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value primary">28</div>
+                <div class="stat-label">Voice Features</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value success">89.5%</div>
+                <div class="stat-label">F1 Score</div>
+            </div>
         </div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('prediction')">Predictor</button>
-            <button class="tab-btn" onclick="switchTab('analysis')">Dataset & Model Analysis</button>
+        <!-- TOP-LEVEL NAV TABS -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="switchMainTab('predictor')" id="tab-predictor">
+                <span class="tab-icon">🔬</span> Predictor
+            </button>
+            <button class="nav-tab" onclick="switchMainTab('analysis')" id="tab-analysis">
+                <span class="tab-icon">📊</span> Dataset & Model Analysis
+            </button>
         </div>
 
-        <div id="prediction" class="tab-content active">
-            <div class="card" id="recording-card">
-                <div class="record-container" id="record-container">
-                    <button class="mic-btn" id="record-btn">🎙️</button>
-                    <div class="timer" id="recording-timer">00:00</div>
-                    <h3 style="margin: 0 0 0.5rem 0;" id="record-status">Click to Start Recording</h3>
-                    <p style="margin: 0; color: var(--text-muted); text-align: center;">Record yourself reading the
-                        phrase above.<br>Press again to stop and auto-analyze.</p>
+        <!-- ===================== PREDICTOR TAB ===================== -->
+        <div class="tab-pane active" id="pane-predictor">
+
+            <div class="glass-card">
+                <div class="card-title">🧠 Voice Analysis Pipeline</div>
+                <div class="card-subtitle">Record your voice or upload an audio file for Parkinson's disease prediction
                 </div>
-                <div class="loader" id="loader"></div>
+
+                <!-- Mode Toggle -->
+                <div class="mode-toggle">
+                    <button class="mode-btn active" id="mode-record-btn" onclick="switchMode('record')">
+                        🎙️ Live Recording
+                    </button>
+                    <button class="mode-btn" id="mode-upload-btn" onclick="switchMode('upload')">
+                        📁 Upload File
+                    </button>
+                </div>
+
+                <!-- RECORD MODE -->
+                <div class="mode-content active" id="mode-record">
+                    <div class="phrase-box">
+                        <div class="phrase-label">📖 Read This Phrase Aloud</div>
+                        <div class="phrase-text">
+                            "Today is a bright and beautiful day. I woke up early in the morning and went for a walk in
+                            the park.
+                            The birds were singing and the weather felt calm and peaceful.
+                            Walking and talking clearly makes me feel relaxed and confident."
+                        </div>
+                    </div>
+
+                    <div class="record-area" id="recordArea">
+                        <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                            <div class="mic-ring"></div>
+                            <div class="mic-ring"></div>
+                            <div class="mic-ring"></div>
+                            <button class="mic-button" id="recordBtn" title="Click to Start/Stop Recording">
+                                🎙️
+                            </button>
+                        </div>
+                        <div class="timer-text" id="timerDisplay">00:00</div>
+                        <div class="record-label" id="recordStatus">Click to Start Recording</div>
+                        <div class="record-hint">Press again to stop and auto-analyze</div>
+                    </div>
+                </div>
+
+                <!-- UPLOAD MODE -->
+                <div class="mode-content" id="mode-upload">
+                    <div class="upload-dropzone" id="uploadZone">
+                        <span class="upload-icon">☁️</span>
+                        <div class="upload-title">Drag & Drop Your Audio File</div>
+                        <div class="upload-or">— or —</div>
+                        <button class="browse-btn" onclick="document.getElementById('fileInput').click()">Browse
+                            Files</button>
+                        <div class="upload-formats">Supported: WAV, MP3, WEBM</div>
+                        <input type="file" id="fileInput" accept="audio/wav,audio/mpeg,audio/webm"
+                            style="display: none;">
+                    </div>
+                    <div class="selected-file" id="selectedFileName"></div>
+                    <button class="analyze-btn" id="predictUploadBtn" disabled>
+                        ⚡ Analyze Uploaded Audio
+                    </button>
+                </div>
             </div>
 
-            <div class="card results" id="results-section">
-                <div class="result-header">
-                    <div class="prediction-text" id="pred-text">Result</div>
-                    <div class="confidence" id="conf-text">Confidence: -</div>
+            <!-- Loader -->
+            <div class="loader-container" id="loader">
+                <div class="loader-spinner"></div>
+                <div class="loader-text">Analyzing voice features...</div>
+            </div>
+
+            <!-- Results -->
+            <div class="glass-card results-card" id="results-section">
+                <div class="result-banner" id="resultBanner">
+                    <div class="result-icon" id="resultIcon">🔬</div>
+                    <div class="result-prediction" id="pred-text">Result</div>
+                    <div class="result-confidence" id="conf-text">Confidence: —</div>
                 </div>
 
+                <div class="plots-section-title">📈 Voice Analysis Plots</div>
                 <div class="plots-grid">
-                    <div class="plot-container">
-                        <h3>Waveform Analysis</h3>
+                    <div class="plot-card">
+                        <h4>Waveform Analysis</h4>
+                        <div class="plot-desc">Time-domain representation of the audio signal</div>
                         <img id="waveform-img" src="" alt="Waveform">
                     </div>
-                    <div class="plot-container">
-                        <h3>Spectrogram</h3>
+                    <div class="plot-card">
+                        <h4>Spectrogram</h4>
+                        <div class="plot-desc">Frequency spectrum of the voice recording over time</div>
                         <img id="spectrogram-img" src="" alt="Spectrogram">
                     </div>
-                    <div class="plot-container">
-                        <h3>Feature Importance (SHAP Explainable AI)</h3>
-                        <p style="font-size: 0.9rem; color: #94a3b8; margin-top: -0.5rem; margin-bottom: 1rem;">
-                            Shows which voice features most strongly influenced this specific prediction.
-                        </p>
+                    <div class="plot-card">
+                        <h4>SHAP Feature Importance</h4>
+                        <div class="plot-desc">Explainable AI — which voice features most influenced the prediction
+                        </div>
                         <img id="shap-img" src="" alt="SHAP Feature Importance">
                     </div>
                 </div>
             </div>
+
         </div>
 
-        <div id="analysis" class="tab-content">
-            <div class="card">
-                <div style="margin-bottom: 2rem; border-bottom: 1px solid #334155; padding-bottom: 1rem;">
-                    <h2>Model & Dataset Analysis Dashboard</h2>
-                    <p style="color: var(--text-muted);">Visualizations generated during the model training phase.</p>
+        <!-- ===================== ANALYSIS TAB ===================== -->
+        <div class="tab-pane" id="pane-analysis">
+            <div class="glass-card">
+                <div class="analysis-header">
+                    <h2>📊 Model & Dataset Analysis</h2>
+                    <p>Visualizations generated during the model training phase</p>
                 </div>
 
-                <div class="plots-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-                    <div class="plot-container">
-                        <h3>Dataset Class Distribution</h3>
-                        <img src="plots/dataset_distribution.png" alt="Dataset Distribution Chart"
-                            onerror="this.src=''; this.alt='Training in progress or plots missing. Please run train_model.py.'">
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>🎯 Dataset Class Distribution</h3>
+                        <div class="analysis-desc">Proportion of Parkinson's vs Healthy samples in the training dataset
+                        </div>
+                        <img src="static/plots/dataset_distribution.png" alt="Dataset Distribution"
+                            onerror="this.alt='Run train_model.py to generate plots'; this.style.display='none';">
                     </div>
-                    <div class="plot-container">
-                        <h3>Model Performance Comparison</h3>
-                        <img src="plots/model_comparison.png" alt="Model Comparison Chart"
-                            onerror="this.src=''; this.alt='Plots not found.'">
+                    <div class="analysis-card">
+                        <h3>🏆 Model Performance Comparison</h3>
+                        <div class="analysis-desc">Accuracy, Precision, Recall, and F1 Score across all trained models
+                        </div>
+                        <img src="static/plots/model_comparison.png" alt="Model Comparison"
+                            onerror="this.alt='Plots not generated yet'; this.style.display='none';">
                     </div>
-                    <div class="plot-container" style="grid-column: 1 / -1;">
-                        <h3>Feature Correlation Heatmap</h3>
-                        <p style="font-size: 0.9rem; color: #94a3b8; margin-top: -0.5rem; margin-bottom: 1rem;">Shows
-                            correlations between all extracted audio features.</p>
-                        <img src="plots/feature_correlation.png" alt="Feature Correlation Heatmap"
-                            onerror="this.src=''; this.alt='Plots not found.'">
+                    <div class="analysis-card full-width">
+                        <h3>🔥 Feature Correlation Heatmap</h3>
+                        <div class="analysis-desc">Pearson correlation between all 22 extracted acoustic features</div>
+                        <img src="static/plots/feature_correlation.png" alt="Feature Correlation"
+                            onerror="this.alt='Plots not generated yet'; this.style.display='none';">
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Built with ❤️ using Python, Flask, scikit-learn, XGBoost & SHAP<br>
+                University Minor Project — Parkinson's Disease Prediction via Voice Analysis</p>
+        </div>
+
     </div>
 
+    <!-- ======================== JAVASCRIPT ======================== -->
     <script>
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            document.querySelector(`.tab-btn[onclick="switchTab('${tabId}')"]`).classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+        // ==========================================
+        // TOP-LEVEL TAB SWITCHING
+        // ==========================================
+        function switchMainTab(tabId) {
+            document.querySelectorAll('.nav-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            document.getElementById('pane-' + tabId).classList.add('active');
         }
 
-        // Live Audio Recording Logic
-        const recordBtn = document.getElementById('record-btn');
-        const recordStatus = document.getElementById('record-status');
-        const recordContainer = document.getElementById('record-container');
-        const timerDisplay = document.getElementById('recording-timer');
+        // ==========================================
+        // MODE SWITCHING (Record vs Upload)
+        // ==========================================
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.mode-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('mode-' + mode + '-btn').classList.add('active');
+            document.getElementById('mode-' + mode).classList.add('active');
+        }
+
+        // ==========================================
+        // GLOBAL ELEMENT REFERENCES
+        // ==========================================
         const loader = document.getElementById('loader');
         const resultsSection = document.getElementById('results-section');
+        const predictionText = document.getElementById('pred-text');
+        const confidenceText = document.getElementById('conf-text');
+        const resultBanner = document.getElementById('resultBanner');
+        const resultIcon = document.getElementById('resultIcon');
+        const waveformImg = document.getElementById('waveform-img');
+        const spectrogramImg = document.getElementById('spectrogram-img');
+        const shapImg = document.getElementById('shap-img');
+
+        // ==========================================
+        // LIVE RECORDING
+        // ==========================================
+        const recordBtn = document.getElementById('recordBtn');
+        const recordStatus = document.getElementById('recordStatus');
+        const recordArea = document.getElementById('recordArea');
+        const timerDisplay = document.getElementById('timerDisplay');
 
         let mediaRecorder;
         let audioChunks = [];
@@ -392,117 +1187,169 @@
 
         function updateTimer() {
             recordingTime++;
-            const minutes = Math.floor(recordingTime / 60).toString().padStart(2, '0');
-            const seconds = (recordingTime % 60).toString().padStart(2, '0');
-            timerDisplay.textContent = `${minutes}:${seconds}`;
+            const m = Math.floor(recordingTime / 60).toString().padStart(2, '0');
+            const s = (recordingTime % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${m}:${s}`;
         }
 
         recordBtn.addEventListener('click', async () => {
             if (!isRecording) {
-                // Start Recording
                 try {
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     mediaRecorder = new MediaRecorder(stream);
                     audioChunks = [];
 
-                    mediaRecorder.ondataavailable = event => {
-                        if (event.data.size > 0) {
-                            audioChunks.push(event.data);
-                        }
+                    mediaRecorder.ondataavailable = e => {
+                        if (e.data.size > 0) audioChunks.push(e.data);
                     };
 
                     mediaRecorder.onstop = async () => {
-                        // Stop tracks to release microphone
-                        stream.getTracks().forEach(track => track.stop());
-                        
-                        // Create Blob
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); 
-                        // Note: Using webm, the Flask backend may need to handle it or Librosa normally handles it fine.
-                        // We will send it as 'audio.webm'
-                        processAudio(audioBlob);
+                        stream.getTracks().forEach(t => t.stop());
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        processAudio(audioBlob, 'recording.webm');
                     };
 
                     mediaRecorder.start();
                     isRecording = true;
-                    
-                    // UI Updates
+
                     recordBtn.classList.add('recording');
-                    recordContainer.classList.add('recording');
-                    recordBtn.innerHTML = '🛑';
-                    recordStatus.textContent = "Recording... Click to Stop";
-                    
+                    recordArea.classList.add('recording');
+                    recordBtn.innerHTML = '⏹️';
+                    recordStatus.textContent = 'Recording... Click to Stop';
+
                     recordingTime = 0;
-                    timerDisplay.textContent = "00:00";
+                    timerDisplay.textContent = '00:00';
                     timerInterval = setInterval(updateTimer, 1000);
-                    
-                    // Hide previous results
+
                     resultsSection.style.display = 'none';
+                    resultsSection.classList.remove('visible');
 
                 } catch (err) {
-                    console.error("Microphone access denied or error: ", err);
-                    alert("Unable to access the microphone. Please allow microphone permissions in your browser.");
+                    console.error('Microphone error:', err);
+                    alert('Could not access microphone. Please check permissions.');
                 }
             } else {
-                // Stop Recording
                 mediaRecorder.stop();
                 isRecording = false;
-                
-                // UI Updates
-                recordBtn.classList.remove('recording');
-                recordContainer.classList.remove('recording');
-                recordBtn.innerHTML = '🎙️';
-                recordStatus.textContent = "Analyzing Audio...";
                 clearInterval(timerInterval);
+
+                recordBtn.classList.remove('recording');
+                recordArea.classList.remove('recording');
+                recordBtn.innerHTML = '🎙️';
+                recordStatus.textContent = 'Processing your voice...';
             }
         });
 
-        async function processAudio(audioBlob) {
-            // UI State
-            recordBtn.disabled = true;
+        // ==========================================
+        // FILE UPLOAD
+        // ==========================================
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const selectedFileName = document.getElementById('selectedFileName');
+        const predictUploadBtn = document.getElementById('predictUploadBtn');
+        let selectedFile = null;
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => {
+            uploadZone.addEventListener(ev, e => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(ev => {
+            uploadZone.addEventListener(ev, () => uploadZone.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(ev => {
+            uploadZone.addEventListener(ev, () => uploadZone.classList.remove('dragover'), false);
+        });
+
+        uploadZone.addEventListener('drop', e => handleFiles(e.dataTransfer.files));
+        fileInput.addEventListener('change', function () { handleFiles(this.files); });
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                selectedFile = files[0];
+                const ext = selectedFile.name.split('.').pop().toLowerCase();
+                const valid = ['audio/wav', 'audio/mpeg', 'audio/mp3', 'audio/webm'];
+
+                if (valid.includes(selectedFile.type) || ['wav', 'mp3', 'webm'].includes(ext)) {
+                    selectedFileName.textContent = `✅ Selected: ${selectedFile.name}`;
+                    predictUploadBtn.disabled = false;
+                    predictUploadBtn.style.opacity = '1';
+                } else {
+                    alert('Invalid file format. Please upload WAV, MP3, or WEBM files.');
+                    selectedFile = null;
+                    selectedFileName.textContent = '';
+                    predictUploadBtn.disabled = true;
+                    predictUploadBtn.style.opacity = '0.4';
+                }
+            }
+        }
+
+        predictUploadBtn.addEventListener('click', () => {
+            if (selectedFile) {
+                predictUploadBtn.disabled = true;
+                predictUploadBtn.textContent = '⏳ Processing...';
+                processAudio(selectedFile, selectedFile.name, predictUploadBtn);
+            }
+        });
+
+        // ==========================================
+        // SHARED API PIPELINE
+        // ==========================================
+        async function processAudio(blob, name = 'audio.webm', btnRef = null) {
             loader.style.display = 'block';
+            resultsSection.style.display = 'none';
+            resultsSection.classList.remove('visible');
 
             const formData = new FormData();
-            // Append as webm, but name it so Flask recognizes it needs parsing
-            formData.append('file', audioBlob, 'recording.webm');
+            formData.append('file', blob, name);
 
             try {
-                const response = await fetch('/predict', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const data = await response.json();
-                
+                const res = await fetch('/predict', { method: 'POST', body: formData });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+
                 if (data.error) {
                     alert('Error: ' + data.error);
                 } else {
-                    // Update Results UI
-                    const textEl = document.getElementById('pred-text');
-                    textEl.textContent = data.prediction;
-                    if (data.prediction.includes("Healthy")) {
-                        textEl.className = 'prediction-text negative';
+                    predictionText.textContent = data.prediction;
+                    confidenceText.innerHTML = `Confidence: <span>${(data.confidence * 100).toFixed(1)}%</span>`;
+
+                    if (data.prediction_class === 1) {
+                        predictionText.className = 'result-prediction parkinsons';
+                        resultBanner.className = 'result-banner parkinsons';
+                        resultIcon.textContent = '⚠️';
                     } else {
-                        textEl.className = 'prediction-text positive';
+                        predictionText.className = 'result-prediction healthy';
+                        resultBanner.className = 'result-banner healthy';
+                        resultIcon.textContent = '✅';
                     }
-                    
-                    document.getElementById('conf-text').textContent = `Confidence: ${(data.confidence * 100).toFixed(1)}%`;
-                    
-                    document.getElementById('waveform-img').src = data.waveform + "?t=" + new Date().getTime();
-                    document.getElementById('spectrogram-img').src = data.spectrogram + "?t=" + new Date().getTime();
-                    if (data.shap) {
-                        document.getElementById('shap-img').src = data.shap + "?t=" + new Date().getTime();
+
+                    const ts = Date.now();
+                    waveformImg.src = data.waveform + '?t=' + ts;
+                    spectrogramImg.src = data.spectrogram + '?t=' + ts;
+                    if (data.shap_plot_path) {
+                        const img = data.shap_plot_path.split('/').pop();
+                        shapImg.src = `/static/plots/${img}?t=${ts}`;
+                    } else {
+                        shapImg.src = '';
                     }
-                    
+
                     resultsSection.style.display = 'block';
+                    resultsSection.classList.add('visible');
+                    resultsSection.scrollIntoView({ behavior: 'smooth' });
                 }
             } catch (err) {
-                alert('Connection error. Please ensure the backend is running.');
-                console.error(err);
+                console.error('Analysis failed:', err);
+                alert('Failed to analyze audio. Check that the server is running.');
             } finally {
-                recordBtn.disabled = false;
                 loader.style.display = 'none';
-                recordStatus.textContent = "Click to Start Recording";
-                timerDisplay.textContent = "00:00";
+                recordStatus.textContent = 'Click to Start Recording';
+                timerDisplay.textContent = '00:00';
+                if (btnRef) {
+                    btnRef.disabled = false;
+                    btnRef.textContent = '⚡ Analyze Uploaded Audio';
+                    btnRef.style.opacity = '1';
+                }
             }
         }
     </script>
