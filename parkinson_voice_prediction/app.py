@@ -78,7 +78,7 @@ def main():
         st.subheader("Prediction Settings")
         pred_type = st.radio(
             "Select Input Method:", 
-            ["🎧 Audio Upload", "📊 Clinical Features"],
+            ["🎧 Audio Upload", "📊 Clinical Features", "✍️ Spiral Drawing Upload"],
             help="Choose how you want to provide data for the analysis."
         )
         
@@ -90,7 +90,7 @@ def main():
             help="Use advanced audio feature embeddings from HuggingFace's Wav2Vec 2.0 model (Requires Audio Upload)."
         )
         
-        if use_wav2vec and pred_type == "📊 Clinical Features":
+        if use_wav2vec and pred_type != "🎧 Audio Upload":
             st.error("⚠️ Wav2Vec 2.0 only works with Audio Upload. Please switch the input method.")
             
         st.markdown("---")
@@ -165,6 +165,55 @@ def main():
             except FileNotFoundError:
                 st.warning("⚠️ Feature models are not loaded. Please run the training pipeline first.")
                 
+        elif pred_type == "✍️ Spiral Drawing Upload":
+            st.info("Provide an image of a spiral drawing for CNN-based analysis.")
+            
+            uploaded_image = st.file_uploader("Upload Spiral Drawing (.png, .jpg, .jpeg)", type=["png", "jpg", "jpeg"])
+            
+            if uploaded_image is not None:
+                image = Image.open(uploaded_image)
+                st.image(image, caption="Uploaded Spiral Drawing", width=300)
+                
+                col1, col2, col3 = st.columns([1, 1, 1])
+                with col2:
+                    analyze_img_btn = st.button("🔍 Analyze Drawing", use_container_width=True, type="primary")
+                    
+                if analyze_img_btn:
+                    os.makedirs("dataset/temp_uploads", exist_ok=True)
+                    # Use a safely constructed filename or the original name
+                    file_name = uploaded_image.name if hasattr(uploaded_image, "name") and uploaded_image.name else "uploaded_spiral.png"
+                    file_path = f"dataset/temp_uploads/{file_name}"
+                    
+                    with open(file_path, "wb") as f:
+                        f.write(uploaded_image.getbuffer())
+                        
+                    with st.spinner("Analyzing spiral drawing with CNN..."):
+                        try:
+                            result, prob = predictor.predict_from_spiral_image(file_path)
+                            
+                            st.markdown("---")
+                            st.write("### Analysis Results")
+                            st.write("*Analysis performed using: PyTorch ResNet Image Classifier*")
+                            
+                            if result == "Parkinson Detected":
+                                st.markdown(f'''
+                                    <div class="prediction-box parkinson-box">
+                                        <h1>🚨 {result}</h1>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                        <p>The model detected traits in the spiral drawing often associated with Parkinson's Disease.</p>
+                                    </div>
+                                ''', unsafe_allow_html=True)
+                            else:
+                                st.markdown(f'''
+                                    <div class="prediction-box healthy-box">
+                                        <h1>✅ {result}</h1>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                        <p>The spiral drawing appears typical and healthy.</p>
+                                    </div>
+                                ''', unsafe_allow_html=True)
+                        except Exception as e:
+                            st.error(f"Prediction error: {e}", icon="🚨")
+
         else: # Audio Upload or Record
             st.info("Provide a voice recording for automated feature extraction and analysis.")
             

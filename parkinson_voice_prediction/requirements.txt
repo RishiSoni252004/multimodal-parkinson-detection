@@ -11,5 +11,7 @@ seaborn
 streamlit
 imbalanced-learn
 torch
+torchvision
+Pillow
 transformers
 soundfile

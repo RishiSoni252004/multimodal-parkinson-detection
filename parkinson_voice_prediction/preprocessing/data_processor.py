@@ -33,6 +33,28 @@ class DataProcessor:
         if 'name' in df.columns:
             df.drop(columns=['name'], inplace=True)
 
+        # Handle Outliers using IQR method for features (not target)
+        numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+        if 'status' in numeric_cols:
+            numeric_cols.remove('status')
+            
+        print("Capping outliers using the IQR method...")
+        for col in numeric_cols:
+            Q1 = df[col].quantile(0.25)
+            Q3 = df[col].quantile(0.75)
+            IQR = Q3 - Q1
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
+            
+            # Cap the values
+            df[col] = np.where(df[col] > upper_bound, upper_bound, 
+                               np.where(df[col] < lower_bound, lower_bound, df[col]))
+        
+        # Save cleaned dataset
+        cleaned_path = self.dataset_path.replace(".csv", "_cleaned.csv")
+        df.to_csv(cleaned_path, index=False)
+        print(f"Saved cleaned dataset to {cleaned_path}")
+
         # Extract features and target (target column is 'status')
         target_col = 'status'
         if target_col not in df.columns:

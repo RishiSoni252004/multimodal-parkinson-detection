@@ -4,6 +4,7 @@ import numpy as np
 import subprocess
 from feature_extraction.extract_features import extract_features_from_audio
 from models.wav2vec_model import Wav2VecParkinsonModel
+from models.spiral_model import SpiralModel
 
 def convert_to_wav(input_path):
     """
@@ -41,6 +42,8 @@ class Predictor:
         self.selected_features_path = "models/selected_features.pkl"
         self.classical_model_path = "models/best_model.pkl"
         self.wav2vec_classifier_path = "models/wav2vec_classifier.pkl"
+        self.spiral_model_path = "models/spiral_model.pth"
+        self.spiral_model = None
         
     def predict_from_features(self, feature_array, use_wav2vec=False):
         """Option 1: Accept voice feature values directly."""
@@ -86,3 +89,10 @@ class Predictor:
             feature_array = [features_dict.get(f, 0) for f in selected_features]
             
             return self.predict_from_features(feature_array)
+
+    def predict_from_spiral_image(self, image_path):
+        """Option 3: Accept a spiral drawing image file."""
+        if self.spiral_model is None:
+            self.spiral_model = SpiralModel(self.spiral_model_path)
+            
+        return self.spiral_model.predict(image_path)

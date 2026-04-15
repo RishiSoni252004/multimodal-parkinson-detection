@@ -7,7 +7,12 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
-from xgboost import XGBClassifier
+try:
+    from xgboost import XGBClassifier
+    HAS_XGBOOST = True
+except Exception as e:
+    print(f"Warning: XGBoost failed to load ({e}). Skipping XGBoost model.")
+    HAS_XGBOOST = False
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
@@ -127,12 +132,14 @@ def train_and_compare_models():
     
     models = {
         'Random Forest': RandomForestClassifier(n_estimators=500, max_depth=15, random_state=42),
-        'SVM': SVC(probability=True, kernel='rbf', C=10, gamma='scale', random_state=42),
-        'XGBoost': XGBClassifier(
+        'SVM': SVC(probability=True, kernel='rbf', C=10, gamma='scale', random_state=42)
+    }
+    
+    if HAS_XGBOOST:
+        models['XGBoost'] = XGBClassifier(
             n_estimators=500, max_depth=6, learning_rate=0.05,
             use_label_encoder=False, eval_metric='logloss', random_state=42
         )
-    }
     
     best_model_name = None
     best_model = None

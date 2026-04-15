@@ -104,3 +104,32 @@ def _set_defaults():
         'NHR': 0.02, 'HNR': 20.0,
         'RPDE': 0.5, 'DFA': 0.7, 'spread1': -5.0, 'spread2': 0.2, 'D2': 2.0, 'PPE': 0.2
     }
+
+def process_audio_directory(dataset_path, output_csv="extracted_features.csv"):
+    """
+    Processes a directory containing subdirectories for classes (e.g., parkinson/, healthy/).
+    """
+    data = []
+    
+    for class_folder in os.listdir(dataset_path):
+        class_path = os.path.join(dataset_path, class_folder)
+        if not os.path.isdir(class_path):
+            continue
+            
+        label = 1 if 'parkinson' in class_folder.lower() else 0
+        
+        for file in os.listdir(class_path):
+            if file.endswith('.wav') or file.endswith('.mp3'):
+                file_path = os.path.join(class_path, file)
+                print(f"Processing {file_path}")
+                features = extract_features_from_audio(file_path)
+                if features:
+                    features['target'] = label
+                    data.append(features)
+                    
+    if data:
+        df = pd.DataFrame(data)
+        df.to_csv(output_csv, index=False)
+        print(f"Features saved to {output_csv}")
+        return df
+    return pd.DataFrame()
