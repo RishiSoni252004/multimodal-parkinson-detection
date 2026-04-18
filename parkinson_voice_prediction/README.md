@@ -72,4 +72,4 @@ This project builds a **multi-modal machine learning system** that predicts whet
 
 ## Example Output
 **Prediction**: Parkinson's Detected  
-**Confidence**: 91.2%
+**Confidence**: 91.2% 
