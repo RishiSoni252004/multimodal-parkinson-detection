@@ -1,214 +1,494 @@
-/Users/rishi/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
 
   You can now view your Streamlit app in your browser.
 
   Local URL: http://localhost:8501
-  Network URL: http://192.168.1.2:8501
-  External URL: http://223.178.82.178:8501
+  Network URL: http://192.168.1.11:8501
+  External URL: http://223.178.86.58:8501
 
   For better performance, install the Watchdog module:
 
   $ xcode-select --install
   $ pip install watchdog
             
-2026-04-15 19:16:29.303 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:53.435 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:29.345 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:53.470 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:29.365 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:53.497 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:29.385 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:53.524 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:29.393 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:53.534 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:50.706 Please replace `use_container_width` with `width`.
+Accessing `__path__` from `.models.aria.image_processing_aria`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.aria.image_processing_pil_aria`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.auto.image_processing_auto`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.beit.image_processing_beit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.beit.image_processing_pil_beit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bit.image_processing_bit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bit.image_processing_pil_bit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.blip.image_processing_blip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.blip.image_processing_pil_blip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bridgetower.image_processing_bridgetower`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bridgetower.image_processing_pil_bridgetower`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chameleon.image_processing_chameleon`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chameleon.image_processing_pil_chameleon`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chinese_clip.image_processing_chinese_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chinese_clip.image_processing_chinese_pil_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chmv2.image_processing_chmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.clip.image_processing_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.clip.image_processing_pil_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.cohere2_vision.image_processing_cohere2_vision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.conditional_detr.image_processing_conditional_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.conditional_detr.image_processing_pil_conditional_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.convnext.image_processing_convnext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.convnext.image_processing_pil_convnext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl.image_processing_deepseek_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl.image_processing_pil_deepseek_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl_hybrid.image_processing_deepseek_vl_hybrid`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl_hybrid.image_processing_pil_deepseek_vl_hybrid`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deformable_detr.image_processing_deformable_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deformable_detr.image_processing_pil_deformable_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deit.image_processing_deit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deit.image_processing_pil_deit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.depth_pro.image_processing_depth_pro`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.detr.image_processing_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.detr.image_processing_pil_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dinov3_vit.image_processing_dinov3_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.donut.image_processing_donut`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.donut.image_processing_pil_donut`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dpt.image_processing_dpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dpt.image_processing_pil_dpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientloftr.image_processing_efficientloftr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientloftr.image_processing_pil_efficientloftr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientnet.image_processing_efficientnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientnet.image_processing_pil_efficientnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.emu3.image_processing_emu3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.eomt.image_processing_eomt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.eomt.image_processing_pil_eomt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ernie4_5_vl_moe.image_processing_ernie4_5_vl_moe`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ernie4_5_vl_moe.image_processing_pil_ernie4_5_vl_moe`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.flava.image_processing_flava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.flava.image_processing_pil_flava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.fuyu.image_processing_fuyu`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.fuyu.image_processing_pil_fuyu`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma3.image_processing_gemma3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma3.image_processing_pil_gemma3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma4.image_processing_gemma4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma4.image_processing_pil_gemma4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm46v.image_processing_glm46v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm46v.image_processing_pil_glm46v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm4v.image_processing_glm4v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm4v.image_processing_pil_glm4v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm_image.image_processing_glm_image`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm_image.image_processing_pil_glm_image`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glpn.image_processing_glpn`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glpn.image_processing_pil_glpn`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.got_ocr2.image_processing_got_ocr2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.got_ocr2.image_processing_pil_got_ocr2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.grounding_dino.image_processing_grounding_dino`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.grounding_dino.image_processing_pil_grounding_dino`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics.image_processing_idefics`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics.image_processing_pil_idefics`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics2.image_processing_idefics2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics2.image_processing_pil_idefics2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics3.image_processing_idefics3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics3.image_processing_pil_idefics3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.imagegpt.image_processing_imagegpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.imagegpt.image_processing_pil_imagegpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.janus.image_processing_janus`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.janus.image_processing_pil_janus`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.kosmos2_5.image_processing_kosmos2_5`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.kosmos2_5.image_processing_pil_kosmos2_5`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv2.image_processing_layoutlmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv2.image_processing_pil_layoutlmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv3.image_processing_layoutlmv3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv3.image_processing_pil_layoutlmv3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.levit.image_processing_levit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.levit.image_processing_pil_levit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lfm2_vl.image_processing_lfm2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lightglue.image_processing_lightglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lightglue.image_processing_pil_lightglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llama4.image_processing_llama4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava.image_processing_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava.image_processing_pil_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_next.image_processing_llava_next`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_next.image_processing_pil_llava_next`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_onevision.image_processing_llava_onevision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_onevision.image_processing_pil_llava_onevision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mask2former.image_processing_mask2former`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mask2former.image_processing_pil_mask2former`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.maskformer.image_processing_maskformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.maskformer.image_processing_pil_maskformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mllama.image_processing_mllama`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mllama.image_processing_pil_mllama`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v1.image_processing_mobilenet_pil_v1`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v1.image_processing_mobilenet_v1`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v2.image_processing_mobilenet_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v2.image_processing_pil_mobilenet_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilevit.image_processing_mobilevit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilevit.image_processing_pil_mobilevit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.nougat.image_processing_nougat`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.nougat.image_processing_pil_nougat`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.oneformer.image_processing_oneformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.oneformer.image_processing_pil_oneformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ovis2.image_processing_ovis2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ovis2.image_processing_pil_ovis2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlv2.image_processing_owlv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlv2.image_processing_pil_owlv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlvit.image_processing_owlvit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlvit.image_processing_pil_owlvit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.paddleocr_vl.image_processing_paddleocr_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.paddleocr_vl.image_processing_pil_paddleocr_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perceiver.image_processing_perceiver`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perceiver.image_processing_pil_perceiver`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perception_lm.image_processing_perception_lm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.phi4_multimodal.image_processing_phi4_multimodal`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pi0.image_processing_pi0`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pix2struct.image_processing_pil_pix2struct`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pix2struct.image_processing_pix2struct`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pixtral.image_processing_pil_pixtral`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pixtral.image_processing_pixtral`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.poolformer.image_processing_pil_poolformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.poolformer.image_processing_poolformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_chart2table.image_processing_pil_pp_chart2table`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_chart2table.image_processing_pp_chart2table`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_doclayout_v2.image_processing_pp_doclayout_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_doclayout_v3.image_processing_pp_doclayout_v3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_lcnet.image_processing_pp_lcnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_ocrv5_server_det.image_processing_pp_ocrv5_server_det`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_ocrv5_server_rec.image_processing_pp_ocrv5_server_rec`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.prompt_depth_anything.image_processing_pil_prompt_depth_anything`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.prompt_depth_anything.image_processing_prompt_depth_anything`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pvt.image_processing_pil_pvt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pvt.image_processing_pvt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.qwen2_vl.image_processing_pil_qwen2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.qwen2_vl.image_processing_qwen2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.rt_detr.image_processing_pil_rt_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.rt_detr.image_processing_rt_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam.image_processing_pil_sam`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam.image_processing_sam`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam2.image_processing_sam2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam3.image_processing_sam3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.segformer.image_processing_pil_segformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.segformer.image_processing_segformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.seggpt.image_processing_pil_seggpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.seggpt.image_processing_seggpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip.image_processing_pil_siglip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip.image_processing_siglip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip2.image_processing_pil_siglip2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip2.image_processing_siglip2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.slanext.image_processing_slanext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.smolvlm.image_processing_pil_smolvlm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.smolvlm.image_processing_smolvlm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superglue.image_processing_pil_superglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superglue.image_processing_superglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superpoint.image_processing_pil_superpoint`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superpoint.image_processing_superpoint`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.swin2sr.image_processing_pil_swin2sr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.swin2sr.image_processing_swin2sr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.textnet.image_processing_pil_textnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.textnet.image_processing_textnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.timm_wrapper.image_processing_timm_wrapper`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.tvp.image_processing_pil_tvp`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.tvp.image_processing_tvp`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.uvdoc.image_processing_uvdoc`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llama_3.image_processing_pil_video_llama_3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llama_3.image_processing_video_llama_3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llava.image_processing_video_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.videomae.image_processing_pil_videomae`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.videomae.image_processing_videomae`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vilt.image_processing_pil_vilt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vilt.image_processing_vilt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vit.image_processing_pil_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vit.image_processing_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitmatte.image_processing_pil_vitmatte`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitmatte.image_processing_vitmatte`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitpose.image_processing_pil_vitpose`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitpose.image_processing_vitpose`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vivit.image_processing_vivit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.yolos.image_processing_pil_yolos`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.yolos.image_processing_yolos`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.zoedepth.image_processing_pil_zoedepth`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.zoedepth.image_processing_zoedepth`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+2026-04-18 22:51:54.885 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:50.732 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:54.894 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:50.750 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:54.909 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:50.771 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:54.925 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:16:50.781 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:54.932 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:17:01.830 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:58.959 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:17:01.836 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:58.965 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:17:01.846 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:58.977 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:17:01.866 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:58.990 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:17:01.877 Please replace `use_container_width` with `width`.
+2026-04-18 22:51:58.997 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:18:25.488 Please replace `use_container_width` with `width`.
+2026-04-18 22:52:00.604 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:18:25.542 Please replace `use_container_width` with `width`.
+2026-04-18 22:52:00.609 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:18:25.568 Please replace `use_container_width` with `width`.
+2026-04-18 22:52:00.617 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:18:25.595 Please replace `use_container_width` with `width`.
+2026-04-18 22:52:00.630 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:18:25.604 Please replace `use_container_width` with `width`.
+2026-04-18 22:52:00.637 Please replace `use_container_width` with `width`.
 
 `use_container_width` will be removed after 2025-12-31.
 
 For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:41.381 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:41.423 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:41.437 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:41.452 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:41.460 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:44.158 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:44.161 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:44.171 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:44.184 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:44.192 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:56.164 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:56.169 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:56.180 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:56.195 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:20:56.202 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:21:01.242 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:21:01.247 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:21:01.257 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:21:01.271 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
-2026-04-15 19:21:01.278 Please replace `use_container_width` with `width`.
-
-`use_container_width` will be removed after 2025-12-31.
-
-For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+Accessing `__path__` from `.models.aria.image_processing_aria`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.aria.image_processing_pil_aria`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.auto.image_processing_auto`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.beit.image_processing_beit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.beit.image_processing_pil_beit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bit.image_processing_bit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bit.image_processing_pil_bit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.blip.image_processing_blip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.blip.image_processing_pil_blip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bridgetower.image_processing_bridgetower`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.bridgetower.image_processing_pil_bridgetower`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chameleon.image_processing_chameleon`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chameleon.image_processing_pil_chameleon`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chinese_clip.image_processing_chinese_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chinese_clip.image_processing_chinese_pil_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.chmv2.image_processing_chmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.clip.image_processing_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.clip.image_processing_pil_clip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.cohere2_vision.image_processing_cohere2_vision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.conditional_detr.image_processing_conditional_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.conditional_detr.image_processing_pil_conditional_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.convnext.image_processing_convnext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.convnext.image_processing_pil_convnext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl.image_processing_deepseek_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl.image_processing_pil_deepseek_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl_hybrid.image_processing_deepseek_vl_hybrid`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deepseek_vl_hybrid.image_processing_pil_deepseek_vl_hybrid`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deformable_detr.image_processing_deformable_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deformable_detr.image_processing_pil_deformable_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deit.image_processing_deit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.deit.image_processing_pil_deit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.depth_pro.image_processing_depth_pro`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.detr.image_processing_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.detr.image_processing_pil_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dinov3_vit.image_processing_dinov3_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.donut.image_processing_donut`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.donut.image_processing_pil_donut`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dpt.image_processing_dpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.dpt.image_processing_pil_dpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientloftr.image_processing_efficientloftr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientloftr.image_processing_pil_efficientloftr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientnet.image_processing_efficientnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.efficientnet.image_processing_pil_efficientnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.emu3.image_processing_emu3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.eomt.image_processing_eomt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.eomt.image_processing_pil_eomt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ernie4_5_vl_moe.image_processing_ernie4_5_vl_moe`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ernie4_5_vl_moe.image_processing_pil_ernie4_5_vl_moe`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.flava.image_processing_flava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.flava.image_processing_pil_flava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.fuyu.image_processing_fuyu`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.fuyu.image_processing_pil_fuyu`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma3.image_processing_gemma3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma3.image_processing_pil_gemma3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma4.image_processing_gemma4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.gemma4.image_processing_pil_gemma4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm46v.image_processing_glm46v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm46v.image_processing_pil_glm46v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm4v.image_processing_glm4v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm4v.image_processing_pil_glm4v`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm_image.image_processing_glm_image`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glm_image.image_processing_pil_glm_image`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glpn.image_processing_glpn`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.glpn.image_processing_pil_glpn`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.got_ocr2.image_processing_got_ocr2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.got_ocr2.image_processing_pil_got_ocr2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.grounding_dino.image_processing_grounding_dino`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.grounding_dino.image_processing_pil_grounding_dino`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics.image_processing_idefics`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics.image_processing_pil_idefics`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics2.image_processing_idefics2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics2.image_processing_pil_idefics2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics3.image_processing_idefics3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.idefics3.image_processing_pil_idefics3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.imagegpt.image_processing_imagegpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.imagegpt.image_processing_pil_imagegpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.janus.image_processing_janus`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.janus.image_processing_pil_janus`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.kosmos2_5.image_processing_kosmos2_5`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.kosmos2_5.image_processing_pil_kosmos2_5`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv2.image_processing_layoutlmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv2.image_processing_pil_layoutlmv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv3.image_processing_layoutlmv3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.layoutlmv3.image_processing_pil_layoutlmv3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.levit.image_processing_levit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.levit.image_processing_pil_levit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lfm2_vl.image_processing_lfm2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lightglue.image_processing_lightglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.lightglue.image_processing_pil_lightglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llama4.image_processing_llama4`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava.image_processing_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava.image_processing_pil_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_next.image_processing_llava_next`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_next.image_processing_pil_llava_next`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_onevision.image_processing_llava_onevision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.llava_onevision.image_processing_pil_llava_onevision`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mask2former.image_processing_mask2former`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mask2former.image_processing_pil_mask2former`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.maskformer.image_processing_maskformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.maskformer.image_processing_pil_maskformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mllama.image_processing_mllama`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mllama.image_processing_pil_mllama`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v1.image_processing_mobilenet_pil_v1`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v1.image_processing_mobilenet_v1`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v2.image_processing_mobilenet_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilenet_v2.image_processing_pil_mobilenet_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilevit.image_processing_mobilevit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.mobilevit.image_processing_pil_mobilevit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.nougat.image_processing_nougat`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.nougat.image_processing_pil_nougat`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.oneformer.image_processing_oneformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.oneformer.image_processing_pil_oneformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ovis2.image_processing_ovis2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.ovis2.image_processing_pil_ovis2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlv2.image_processing_owlv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlv2.image_processing_pil_owlv2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlvit.image_processing_owlvit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.owlvit.image_processing_pil_owlvit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.paddleocr_vl.image_processing_paddleocr_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.paddleocr_vl.image_processing_pil_paddleocr_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perceiver.image_processing_perceiver`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perceiver.image_processing_pil_perceiver`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.perception_lm.image_processing_perception_lm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.phi4_multimodal.image_processing_phi4_multimodal`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pi0.image_processing_pi0`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pix2struct.image_processing_pil_pix2struct`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pix2struct.image_processing_pix2struct`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pixtral.image_processing_pil_pixtral`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pixtral.image_processing_pixtral`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.poolformer.image_processing_pil_poolformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.poolformer.image_processing_poolformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_chart2table.image_processing_pil_pp_chart2table`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_chart2table.image_processing_pp_chart2table`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_doclayout_v2.image_processing_pp_doclayout_v2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_doclayout_v3.image_processing_pp_doclayout_v3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_lcnet.image_processing_pp_lcnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_ocrv5_server_det.image_processing_pp_ocrv5_server_det`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pp_ocrv5_server_rec.image_processing_pp_ocrv5_server_rec`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.prompt_depth_anything.image_processing_pil_prompt_depth_anything`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.prompt_depth_anything.image_processing_prompt_depth_anything`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pvt.image_processing_pil_pvt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.pvt.image_processing_pvt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.qwen2_vl.image_processing_pil_qwen2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.qwen2_vl.image_processing_qwen2_vl`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.rt_detr.image_processing_pil_rt_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.rt_detr.image_processing_rt_detr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam.image_processing_pil_sam`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam.image_processing_sam`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam2.image_processing_sam2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.sam3.image_processing_sam3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.segformer.image_processing_pil_segformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.segformer.image_processing_segformer`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.seggpt.image_processing_pil_seggpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.seggpt.image_processing_seggpt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip.image_processing_pil_siglip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip.image_processing_siglip`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip2.image_processing_pil_siglip2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.siglip2.image_processing_siglip2`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.slanext.image_processing_slanext`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.smolvlm.image_processing_pil_smolvlm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.smolvlm.image_processing_smolvlm`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superglue.image_processing_pil_superglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superglue.image_processing_superglue`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superpoint.image_processing_pil_superpoint`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.superpoint.image_processing_superpoint`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.swin2sr.image_processing_pil_swin2sr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.swin2sr.image_processing_swin2sr`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.textnet.image_processing_pil_textnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.textnet.image_processing_textnet`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.timm_wrapper.image_processing_timm_wrapper`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.tvp.image_processing_pil_tvp`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.tvp.image_processing_tvp`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.uvdoc.image_processing_uvdoc`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llama_3.image_processing_pil_video_llama_3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llama_3.image_processing_video_llama_3`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.video_llava.image_processing_video_llava`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.videomae.image_processing_pil_videomae`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.videomae.image_processing_videomae`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vilt.image_processing_pil_vilt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vilt.image_processing_vilt`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vit.image_processing_pil_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vit.image_processing_vit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitmatte.image_processing_pil_vitmatte`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitmatte.image_processing_vitmatte`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitpose.image_processing_pil_vitpose`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vitpose.image_processing_vitpose`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.vivit.image_processing_vivit`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.yolos.image_processing_pil_yolos`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.yolos.image_processing_yolos`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.zoedepth.image_processing_pil_zoedepth`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.
+Accessing `__path__` from `.models.zoedepth.image_processing_zoedepth`. Returning `__path__` instead. Behavior may be different and this alias will be removed in future versions.

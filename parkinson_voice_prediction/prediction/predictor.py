@@ -2,9 +2,12 @@ import os
 import joblib
 import numpy as np
 import subprocess
+import torch
 from feature_extraction.extract_features import extract_features_from_audio
+from feature_extraction.extract_dl_features import VoiceDataProcessor
 from models.wav2vec_model import Wav2VecParkinsonModel
 from models.spiral_model import SpiralModel
+from models.voice_dl_model import VoiceFNN
 
 def convert_to_wav(input_path):
     """
@@ -35,6 +38,45 @@ def convert_to_wav(input_path):
         # Return the original file, it might just be valid enough for librosa
     
     return input_path
+
+def predict_audio(file_path):
+    """
+    Real-time prediction function utilizing the Voice Deep Learning PyTorch model.
+    It preprocesses audio exactly the same as training, extracts features, and runs inference.
+    """
+    # 1. Preprocess audio & extract features
+    processor = VoiceDataProcessor(target_sr=16000, duration=3.0)
+    y = processor.preprocess_audio(file_path)
+    if y is None or len(y) == 0:
+        raise ValueError("Audio is empty or corrupted.")
+        
+    features = processor.extract_features(y)
+    
+    # 2. Load Deep Learning model components
+    scaler_path = "models/voice_dl_scaler.pkl"
+    model_path = "models/voice_dl_model.pth"
+    
+    if not os.path.exists(scaler_path) or not os.path.exists(model_path):
+        raise FileNotFoundError("Deep Learning Voice model or scaler not found. Please run training pipeline.")
+        
+    scaler = joblib.load(scaler_path)
+    scaled_features = scaler.transform(np.array(features).reshape(1, -1))
+    
+    # 3. Predict
+    input_size = scaled_features.shape[1]
+    model = VoiceFNN(input_size=input_size)
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.eval()
+    
+    with torch.no_grad():
+        inputs = torch.tensor(scaled_features, dtype=torch.float32)
+        outputs = model(inputs)
+        # Apply Temperature Scaling (T=2.0) to soften extreme confidences
+        probs = torch.softmax(outputs / 2.0, dim=1)
+        prob_parkinson = probs[0][1].item()
+        
+    prediction = "Parkinson Detected" if prob_parkinson >= 0.5 else "Healthy"
+    return prediction, float(prob_parkinson)
 
 class Predictor:
     def __init__(self):
@@ -79,16 +121,22 @@ class Predictor:
             return "Parkinson Detected" if prediction == 1 else "Healthy", float(prob)
             
         else:
-            # Extract features manually
-            features_dict = extract_features_from_audio(clean_audio_path)
-            if not features_dict:
-                raise ValueError("Failed to extract classical features from audio.")
+            # Route to the newly improved PyTorch Deep Learning Voice model
+            try:
+                prediction, prob = predict_audio(clean_audio_path)
+                return prediction, prob
+            except Exception as dl_error:
+                print(f"DL Model failed, falling back to classical ML... ({dl_error})")
+                # Extract features manually for classical fallback
+                features_dict = extract_features_from_audio(clean_audio_path)
+                if not features_dict:
+                    raise ValueError("Failed to extract classical features from audio.")
+                    
+                selected_features = joblib.load(self.selected_features_path)
+                # Default to 0 if feature missing
+                feature_array = [features_dict.get(f, 0) for f in selected_features]
                 
-            selected_features = joblib.load(self.selected_features_path)
-            # Default to 0 if feature missing
-            feature_array = [features_dict.get(f, 0) for f in selected_features]
-            
-            return self.predict_from_features(feature_array)
+                return self.predict_from_features(feature_array)
 
     def predict_from_spiral_image(self, image_path):
         """Option 3: Accept a spiral drawing image file."""

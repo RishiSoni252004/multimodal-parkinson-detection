@@ -51,7 +51,8 @@ class SpiralModel:
         self.model.eval()
         with torch.no_grad():
             outputs = self.model(img_tensor)
-            probabilities = torch.nn.functional.softmax(outputs, dim=1)[0]
+            # Apply Temperature Scaling (T=2.0) to prevent the probabilities from rounding to exactly 100.0%
+            probabilities = torch.nn.functional.softmax(outputs / 2.0, dim=1)[0]
             
             prob_healthy = probabilities[0].item()
             prob_parkinson = probabilities[1].item()

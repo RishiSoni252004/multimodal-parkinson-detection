@@ -10,10 +10,17 @@ from prediction.predictor import Predictor
 def load_predictor():
     return Predictor()
 
+def format_conf(prob):
+    # Cap displayed confidence at 99.9% so ML model doesn't claim 100% certainty
+    val = prob * 100
+    if val >= 99.95:
+        return "99.9%"
+    return f"{val:.1f}%"
+
 def main():
     st.set_page_config(
-        page_title="Parkinson's Speech Analysis", 
-        page_icon="🎙️",
+        page_title="Parkinson's Disease Prediction Tool", 
+        page_icon="🧠",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -72,7 +79,7 @@ def main():
     # Sidebar
     with st.sidebar:
         st.image("https://cdn-icons-png.flaticon.com/512/3750/3750569.png", width=100)
-        st.title("🎙️ Analysis Options")
+        st.title("🧠 Analysis Options")
         st.markdown("---")
         
         st.subheader("Prediction Settings")
@@ -97,8 +104,8 @@ def main():
         st.info("💡 **Tip:** Audio upload extracts acoustic features automatically or uses Deep Learning embeddings when enabled.")
 
     # Main Content
-    st.markdown('<p class="main-title">Parkinson\'s Disease Speech Analysis Tool</p>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">Advanced acoustic analysis for early detection using Multiclass Machine Learning & Deep Learning approaches.</p>', unsafe_allow_html=True)
+    st.markdown('<p class="main-title">Parkinson\'s Disease Prediction Tool</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Multi-modal early detection using Voice Analysis &amp; Spiral Drawing with Machine Learning &amp; Deep Learning.</p>', unsafe_allow_html=True)
     
     predictor = load_predictor()
     
@@ -146,7 +153,7 @@ def main():
                                         st.markdown(f"""
                                             <div class="prediction-box parkinson-box">
                                                 <h1>🚨 {result}</h1>
-                                                <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                                <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(prob)}</strong></p>
                                                 <p>The analysis indicates acoustic patterns consistent with Parkinson's Disease.</p>
                                             </div>
                                         """, unsafe_allow_html=True)
@@ -154,7 +161,7 @@ def main():
                                         st.markdown(f"""
                                             <div class="prediction-box healthy-box">
                                                 <h1>✅ {result}</h1>
-                                                <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                                <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(prob)}</strong></p>
                                                 <p>No significant acoustic markers associated with Parkinson's Disease were detected.</p>
                                             </div>
                                         """, unsafe_allow_html=True)
@@ -199,7 +206,7 @@ def main():
                                 st.markdown(f'''
                                     <div class="prediction-box parkinson-box">
                                         <h1>🚨 {result}</h1>
-                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(prob)}</strong></p>
                                         <p>The model detected traits in the spiral drawing often associated with Parkinson's Disease.</p>
                                     </div>
                                 ''', unsafe_allow_html=True)
@@ -207,7 +214,7 @@ def main():
                                 st.markdown(f'''
                                     <div class="prediction-box healthy-box">
                                         <h1>✅ {result}</h1>
-                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(prob)}</strong></p>
                                         <p>The spiral drawing appears typical and healthy.</p>
                                     </div>
                                 ''', unsafe_allow_html=True)
@@ -263,7 +270,7 @@ def main():
                                 st.markdown(f"""
                                     <div class="prediction-box parkinson-box">
                                         <h1>🚨 {result}</h1>
-                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{prob*100:.1f}%</strong></p>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(prob)}</strong></p>
                                         <p>The model detected voice variations often associated with Parkinson's Disease.</p>
                                     </div>
                                 """, unsafe_allow_html=True)
@@ -271,7 +278,7 @@ def main():
                                 st.markdown(f"""
                                     <div class="prediction-box healthy-box">
                                         <h1>✅ {result}</h1>
-                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{(1-prob)*100 if prob < 0.5 else prob*100:.1f}%</strong></p>
+                                        <p style="font-size: 1.2rem;">Model Confidence: <strong>{format_conf(1-prob if prob < 0.5 else prob)}</strong></p>
                                         <p>The voice characteristics appear typical and healthy.</p>
                                     </div>
                                 """, unsafe_allow_html=True)
@@ -327,24 +334,39 @@ def main():
         st.write("### Architecture Overview")
         
         st.write("""
-        This application is an implementation of a **Multiclass Machine Learning Approach** for the early detection of Parkinson's Disease utilizing voice biomarkers.
+        This application is a **Multi-Modal Machine Learning System** for the early detection of Parkinson's Disease utilizing both **voice biomarkers** and **spiral drawing analysis**.
         
-        #### Core Components:
-        1. **Data Processing Pipeline**:
+        ---
+        
+        #### 🎙️ Voice Analysis Pipeline:
+        1. **Data Processing**:
            - Utilizes the UCI Machine Learning Repository *parkinsons* dataset.
            - Employs **SMOTE** (Synthetic Minority Over-sampling Technique) to handle class imbalances.
            - Standardizes numerical variables using `StandardScaler`.
-           
+           - IQR-based outlier capping for robust feature distributions.
+            
         2. **Classical Machine Learning Models**:
            - **KSVM** (Kernel Support Vector Machine)
            - **Random Forest** (RF)
            - **Decision Tree** (DT)
            - **K-Nearest Neighbors** (KNN)
            *All models are fine-tuned using `RandomizedSearchCV`.*
-           
-        3. **Deep Learning Implementations**:
+            
+        3. **Deep Learning (Voice)**:
            - **FNN**: A Feed Forward Neural Network acting on clinical acoustic features.
            - **Wav2Vec 2.0**: A custom integration using HuggingFace's pre-trained model to extract high-dimensional semantic voice embeddings directly from raw audio, feeding into a Neural Classification Head.
+        
+        ---
+        
+        #### ✍️ Spiral Drawing Analysis Pipeline:
+        4. **Image Preprocessing**:
+           - Images are resized to 224×224 pixels and normalized using ImageNet statistics.
+           - Data augmentation (random flips, rotations) is applied during training to improve generalization.
+            
+        5. **Deep Learning (Vision)**:
+           - **ResNet-18 CNN**: A fine-tuned Convolutional Neural Network based on the ResNet-18 architecture, adapted for binary classification of spiral drawings.
+           - Trained for 20 epochs on labeled spiral drawings from healthy individuals and Parkinson's patients.
+           - Achieves real-time inference on uploaded images.
         """)
         
 if __name__ == "__main__":
