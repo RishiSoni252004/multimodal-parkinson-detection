@@ -45,10 +45,14 @@ def train_spiral_model(data_dir="dataset/spiral", epochs=20, batch_size=32, save
         print(f"Failed to load dataset: {e}")
         return
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # MPS (Apple Silicon) > CPU. Never CUDA.
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
     print(f"Training on device: {device}")
 
-    model = models.resnet18(pretrained=True)
+    model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
     num_ftrs = model.fc.in_features
     model.fc = nn.Sequential(
         nn.Dropout(0.5),

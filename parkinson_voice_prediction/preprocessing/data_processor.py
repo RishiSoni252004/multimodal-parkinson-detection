@@ -9,7 +9,7 @@ from imblearn.over_sampling import SMOTE
 import joblib
 
 class DataProcessor:
-    def __init__(self, dataset_path="dataset/parkinsons.csv"):
+    def __init__(self, dataset_path="dataset/parkinsons.data"):
         self.dataset_path = dataset_path
         self.scaler = StandardScaler()
         self.feature_names = None

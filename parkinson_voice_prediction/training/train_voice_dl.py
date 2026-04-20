@@ -63,7 +63,11 @@ def train_voice_dl_model(data_dir="dataset/"):
     input_size = X_train_t.shape[1]
     model = VoiceFNN(input_size=input_size)
     
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # MPS (Apple Silicon) > CPU. Never CUDA.
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+    else:
+        device = torch.device("cpu")
     model.to(device)
     print(f"Training on device: {device}")
     
@@ -138,7 +142,7 @@ def train_voice_dl_model(data_dir="dataset/"):
     print(f"\nBest model saved to {save_path} with Val Loss: {best_val_loss:.4f}")
     
     # Load best model for evaluation
-    model.load_state_dict(torch.load(save_path))
+    model.load_state_dict(torch.load(save_path, map_location=device, weights_only=True))
     model.eval()
     
     all_preds = []

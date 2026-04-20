@@ -7,10 +7,14 @@ from PIL import Image
 class SpiralModel:
     def __init__(self, model_path="models/spiral_model.pth"):
         self.model_path = model_path
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # MPS (Apple Silicon) > CPU. Never CUDA.
+        if torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
         
         # Load a ResNet18 model modified for binary classification
-        self.model = models.resnet18(pretrained=False)
+        self.model = models.resnet18(weights=None)
         num_ftrs = self.model.fc.in_features
         self.model.fc = nn.Sequential(
             nn.Dropout(0.5),
@@ -20,7 +24,7 @@ class SpiralModel:
         self.is_trained = False
         
         if os.path.exists(self.model_path):
-            self.model.load_state_dict(torch.load(self.model_path, map_location=self.device))
+            self.model.load_state_dict(torch.load(self.model_path, map_location=self.device, weights_only=True))
             self.model.eval()
             self.is_trained = True
         else:
