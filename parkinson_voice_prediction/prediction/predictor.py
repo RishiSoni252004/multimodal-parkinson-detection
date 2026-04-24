@@ -103,14 +103,16 @@ def predict_audio_dl(file_path: str) -> tuple:
     device = get_device()
 
     processor = VoiceDataProcessor(target_sr=16000, duration=3.0)
+    print(f"Extracting DL features for {file_path}...")
     y = processor.preprocess_audio(file_path)
     if y is None or len(y) == 0:
         raise ValueError("Audio is empty or corrupted.")
 
     features = processor.extract_features(y)
 
-    scaler_path = "models/voice_dl_scaler.pkl"
-    model_path = "models/voice_dl_model.pth"
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    scaler_path = os.path.join(BASE_DIR, "models", "voice_dl_scaler.pkl")
+    model_path = os.path.join(BASE_DIR, "models", "voice_dl_model.pth")
 
     if not os.path.exists(scaler_path) or not os.path.exists(model_path):
         raise FileNotFoundError("DL Voice model or scaler not found. Run training pipeline.")
@@ -139,11 +141,13 @@ class Predictor:
     """Central prediction class used by the Streamlit app."""
 
     def __init__(self):
-        self.scaler_path = "models/scaler.pkl"
-        self.selected_features_path = "models/selected_features.pkl"
-        self.classical_model_path = "models/best_model.pkl"
-        self.wav2vec_classifier_path = "checkpoints/voice_best.pt"
-        self.spiral_model_path = "models/spiral_model.pth"
+        print("Initializing Predictor and paths...")
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        self.scaler_path = os.path.join(BASE_DIR, "models", "scaler.pkl")
+        self.selected_features_path = os.path.join(BASE_DIR, "models", "selected_features.pkl")
+        self.classical_model_path = os.path.join(BASE_DIR, "models", "best_model.pkl")
+        self.wav2vec_classifier_path = os.path.join(BASE_DIR, "checkpoints", "voice_best.pt")
+        self.spiral_model_path = os.path.join(BASE_DIR, "models", "spiral_model.pth")
         self.spiral_model = None
 
     def predict_from_features(self, feature_array: list, use_wav2vec: bool = False) -> tuple:
@@ -163,6 +167,7 @@ class Predictor:
         if not os.path.exists(self.classical_model_path):
             raise FileNotFoundError(f"Classical model not found at {self.classical_model_path}.")
 
+        print("Predicting from features using Classical ML...")
         scaler = joblib.load(self.scaler_path)
         model = joblib.load(self.classical_model_path)
 
@@ -184,9 +189,11 @@ class Predictor:
             (prediction_label, probability)
         """
         # Standardize audio format
+        print(f"Predicting from audio: {audio_path}")
         clean_audio_path = convert_to_wav(audio_path)
 
         if use_wav2vec:
+            print("Using Wav2Vec2 + PyTorch Classifier...")
             # === Wav2Vec2 + PyTorch Classifier ===
             try:
                 from models.voice_classifier import predict_with_classifier
@@ -206,6 +213,7 @@ class Predictor:
                 except Exception as e:
                     raise RuntimeError(f"Wav2Vec prediction failed: {e}")
         else:
+            print("Using DL Voice Model...")
             # === DL Voice Model (MFCC features) ===
             try:
                 prediction, prob = predict_audio_dl(clean_audio_path)
@@ -215,10 +223,12 @@ class Predictor:
 
                 # === Fallback: Classical ML ===
                 try:
+                    print(f"Extracting Praat features from {clean_audio_path}...")
                     features_dict = extract_features_from_audio(clean_audio_path)
                     if not features_dict:
                         raise ValueError("Failed to extract features from audio.")
 
+                    print("Praat features extracted successfully.")
                     selected_features = joblib.load(self.selected_features_path)
                     feature_array = [features_dict.get(f, 0) for f in selected_features]
                     return self.predict_from_features(feature_array)
@@ -240,6 +250,8 @@ class Predictor:
             (prediction_label, probability)
         """
         if self.spiral_model is None:
+            print("Loading Spiral Model...")
             self.spiral_model = SpiralModel(self.spiral_model_path)
 
+        print(f"Predicting from spiral image: {image_path}")
         return self.spiral_model.predict(image_path)

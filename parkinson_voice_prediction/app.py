@@ -6,6 +6,8 @@ import os
 from PIL import Image
 from prediction.predictor import Predictor
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_resource
 def load_predictor():
     return Predictor()
@@ -107,6 +109,7 @@ def main():
     st.markdown('<p class="main-title">Parkinson\'s Disease Prediction Tool</p>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Multi-modal early detection using Voice Analysis &amp; Spiral Drawing with Machine Learning &amp; Deep Learning.</p>', unsafe_allow_html=True)
     
+    print("Loading Predictor...")
     predictor = load_predictor()
     
     tab1, tab2, tab3 = st.tabs(["🔍 Make a Prediction", "📈 Model Analytics", "ℹ️ About the Architecture"])
@@ -118,7 +121,7 @@ def main():
         if pred_type == "📊 Clinical Features":
             st.info("Provide the extracted clinical features from Praat or similar acoustic analysis software.")
             try:
-                selected_features = joblib.load("models/selected_features.pkl")
+                selected_features = joblib.load(os.path.join(BASE_DIR, "models", "selected_features.pkl"))
                 st.write(f"**Required:** {len(selected_features)} acoustic features.")
                 
                 # Use a slightly better text area with placeholder
@@ -186,10 +189,11 @@ def main():
                     analyze_img_btn = st.button("🔍 Analyze Drawing", use_container_width=True, type="primary")
                     
                 if analyze_img_btn:
-                    os.makedirs("dataset/temp_uploads", exist_ok=True)
+                    temp_dir = os.path.join(BASE_DIR, "dataset", "temp_uploads")
+                    os.makedirs(temp_dir, exist_ok=True)
                     # Use a safely constructed filename or the original name
                     file_name = uploaded_image.name if hasattr(uploaded_image, "name") and uploaded_image.name else "uploaded_spiral.png"
-                    file_path = f"dataset/temp_uploads/{file_name}"
+                    file_path = os.path.join(temp_dir, file_name)
                     
                     with open(file_path, "wb") as f:
                         f.write(uploaded_image.getbuffer())
@@ -248,10 +252,11 @@ def main():
                     analyze_btn = st.button("🔍 Analyze Audio", use_container_width=True, type="primary")
                     
                 if analyze_btn:
-                    os.makedirs("dataset/temp_uploads", exist_ok=True)
+                    temp_dir = os.path.join(BASE_DIR, "dataset", "temp_uploads")
+                    os.makedirs(temp_dir, exist_ok=True)
                     # For recordings, name might be 'audio_record.wav'. Adding index or timestamp is safer.
                     file_name = uploaded_file.name if hasattr(uploaded_file, "name") and uploaded_file.name else "recorded_audio.wav"
-                    file_path = f"dataset/temp_uploads/{file_name}"
+                    file_path = os.path.join(temp_dir, file_name)
                     
                     with open(file_path, "wb") as f:
                         f.write(uploaded_file.getbuffer())
@@ -289,8 +294,8 @@ def main():
         st.write("### Comprehensive Model Evaluation")
         st.write("This dashboard displays the training metrics and visualizations for all models executed in the pipeline.")
         
-        if os.path.exists("models/evaluation_metrics.csv"):
-            metrics_df = pd.read_csv("models/evaluation_metrics.csv")
+        if os.path.exists(os.path.join(BASE_DIR, "models", "evaluation_metrics.csv")):
+            metrics_df = pd.read_csv(os.path.join(BASE_DIR, "models", "evaluation_metrics.csv"))
             
             # Highlight max values in the dataframe
             st.dataframe(
@@ -307,24 +312,28 @@ def main():
             col1, col2 = st.columns(2)
             
             with col1:
-                if os.path.exists("frontend/static/plots/model_comparison.png"):
-                    st.image(Image.open("frontend/static/plots/model_comparison.png"), use_container_width=True)
+                plot_path = os.path.join(BASE_DIR, "frontend", "static", "plots", "model_comparison.png")
+                if os.path.exists(plot_path):
+                    st.image(Image.open(plot_path), use_container_width=True)
                 else:
                     st.info("Model comparison chart not available.")
                     
-                if os.path.exists("frontend/static/plots/roc_curves.png"):
-                    st.image(Image.open("frontend/static/plots/roc_curves.png"), use_container_width=True)
+                plot_path = os.path.join(BASE_DIR, "frontend", "static", "plots", "roc_curves.png")
+                if os.path.exists(plot_path):
+                    st.image(Image.open(plot_path), use_container_width=True)
                 else:
                     st.info("ROC curves not available.")
                     
             with col2:
-                if os.path.exists("frontend/static/plots/cm_random_forest.png"):
-                    st.image(Image.open("frontend/static/plots/cm_random_forest.png"), use_container_width=True)
+                plot_path = os.path.join(BASE_DIR, "frontend", "static", "plots", "cm_random_forest.png")
+                if os.path.exists(plot_path):
+                    st.image(Image.open(plot_path), use_container_width=True)
                 else:
                     st.info("Confusion matrix not available.")
                     
-                if os.path.exists("frontend/static/plots/feature_importance.png"):
-                    st.image(Image.open("frontend/static/plots/feature_importance.png"), use_container_width=True)
+                plot_path = os.path.join(BASE_DIR, "frontend", "static", "plots", "feature_importance.png")
+                if os.path.exists(plot_path):
+                    st.image(Image.open(plot_path), use_container_width=True)
                 else:
                     st.info("Feature importance chart not available.")
         else:
@@ -370,4 +379,10 @@ def main():
         """)
         
 if __name__ == "__main__":
-    main()
+    import sys
+    from streamlit.web import cli as stcli
+    from streamlit import runtime
+    
+    if not runtime.exists():
+        sys.argv = ["streamlit", "run", "app.py"]
+        sys.exit(stcli.main())

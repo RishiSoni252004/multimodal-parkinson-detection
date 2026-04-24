@@ -185,7 +185,12 @@ Examples:
         help="Which training pipeline to run (default: all)"
     )
 
-    args = parser.parse_args()
+    args, unknown = parser.parse_known_args()
+
+    if not hasattr(args, 'mode') or args.mode is None:
+        print("Error: --mode is required (unless running dashboard)")
+        parser.print_help()
+        sys.exit(1)
 
     if args.mode == "train":
         run_train(args)
@@ -194,4 +199,20 @@ Examples:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        from streamlit import runtime
+        in_streamlit = runtime.exists()
+    except ImportError:
+        in_streamlit = False
+
+    if in_streamlit:
+        import app
+        app.main()
+    elif len(sys.argv) == 1:
+        import subprocess
+        print("Launching Streamlit dashboard (app.py)...")
+        app_path = os.path.join(PROJECT_ROOT, "app.py")
+        subprocess.run([sys.executable, "-m", "streamlit", "run", app_path])
+        sys.exit(0)
+    else:
+        main()
